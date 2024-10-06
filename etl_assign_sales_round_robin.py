@@ -145,3 +145,58 @@ def round_robin_leads_sales(leads_dataset, sales_dataset):
     union_no_npp_merged_all = pd.concat([union_no_npp_merged_assigned_adjcols, union_no_npp_merged_notassigned_adjcols])
 
     return union_no_npp_merged_all 
+
+# Creating a sample dataset for lead dataset
+data = {
+    'leads_id': ['e4818062-1c77-4d61-93fa-1b928e9f21a0', 'fd361a34-86e0-451d-b068-2bc881236ee1', 
+                 'b50e8145-db2f-45de-b596-42808de57a7b', 'a103f9d3-9567-4773-9bc1-5e17caa08dde',
+                 'b206340d-0421-4c64-beb9-3f6624cd9676'],
+    'customer_name': ['Cathy Gates', 'James Hutchinson', 'Ryan Daniel', 'Kristina Hall', 'Jeffrey Jones'],
+    'region_code_leads': ['R01', 'R03', 'R02', 'R02', 'R01'],
+    'branch_code_leads': ['B01', 'B02', 'B02', 'B03', 'B01'],
+    'subbranch_code_leads': ['SB03', 'SB03', 'SB03', 'SB02', 'SB02'],
+    'desc_1': ['Structure letter laugh food indeed.', 'Wrong particularly difference.', 
+               'West notice project bit close.', 'House conference play.', 'Become power player poor statement.'],
+    'desc_2': ['Interview chair majority.', 'Difficult in local.', 'System although civil short.', 
+               'Quickly Republican member.', 'Story discuss house.'],
+    'desc_3': ['...', '...', '...', '...', '...'],
+    'desc_4': ['...', '...', '...', '...', '...'],
+    'desc_5': ['...', '...', '...', '...', '...'],
+    'desc_6': ['...', '...', '...', '...', '...'],
+    'desc_7': ['...', '...', '...', '...', '...'],
+    'product_name': ['Product A', 'Product B', 'Product C', 'Product A', 'Product D'],
+    'desc_8': ['...', '...', '...', '...', '...'],
+    'start_date': ['2023-01-01', '2023-03-15', '2023-06-20', '2023-02-10', '2023-04-30'],
+    'expired_date': ['2023-12-31', '2023-10-15', '2023-11-20', '2023-09-10', '2023-08-30'],
+    'desc_9': ['...', '...', '...', '...', '...'],
+    'desc_10': ['...', '...', '...', '...', '...'],
+    'sales_id': ['S001', 'S002', 'S003', 'S001', 'S004'],
+    'flag_salestype_1': [1, 0, 1, 1, 0],
+    'flag_salestype_2': [0, 1, 0, 0, 1],
+    'flag_salestype_3': [1, 0, 0, 1, 0],
+    'flag_salestype_4': [0, 0, 0, 1, 1],
+    'flag_salestype_5': [1, 1, 0, 0, 1],
+    'flag_salestype_6': [0, 0, 0, 0, 0],
+    'flag_salestype_7': [1, 1, 0, 1, 0],
+    'flag_salestype_8': [0, 0, 1, 0, 0],
+    'flag_salestype_9': [0, 0, 0, 1, 0],
+    'flag_salestype_10': [1, 1, 0, 0, 0],
+    'flag_process': [0, 1, 1, 1, 0]
+}
+
+leads_df = pd.DataFrame(data)
+
+# Creating a sample dataset for sales dataset
+sales_data = {
+    'sales_id': ['S001', 'S002', 'S003', 'S004', 'S005'],
+    'sales_type': ['Retail', 'Wholesale', 'Online', 'Retail', 'Online'],
+    'region_code_sales': ['R01', 'R03', 'R02', 'R01', 'R03'],
+    'branch_code_sales': ['B01', 'B02', 'B03', 'B01', 'B02'],
+    'subbranch_code_sales': ['SB01', 'SB02', 'SB03', 'SB01', 'SB02']
+}
+
+sales_df = pd.DataFrame(sales_data)
+
+# Enhance Leads with sales id based on region-branch-subbranch
+sales_assigned_df = round_robin_leads_sales(leads_df, sales_df)
+sales_assigned_df
