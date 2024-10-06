@@ -45,9 +45,15 @@ The script leverages `pandas` to perform ranking and merging operations to ensur
 
 ## Code Example
 ```python
+import pandas as pd
 
+# assume you have leads and sales dataset with region, branch, and subbranch code columns.
+leads_df = pd.DataFrame(data)
+sales_df = pd.DataFrame(sales_data)
 
-round_robin_leads_sales(leads_dataset, sales_dataset)
+# Enhance Leads with sales id based on region-branch-subbranch
+sales_assigned_df = round_robin_leads_sales(leads_df, sales_df)
+sales_assigned_df
 ```
 For the full code, refer to the project file `round_robin_leads_sales.py`.
 
@@ -56,9 +62,10 @@ For the full code, refer to the project file `round_robin_leads_sales.py`.
 - Python 3.x
 
 Install the required libraries via pip:
-    ```bash
-    pip install pandas
-    ```
+    
+```bash
+pip install pandas
+```
 
 ## How to Run the Script
 1) Prepare the datasets for leads and sales teams.
