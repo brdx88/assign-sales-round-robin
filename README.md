@@ -45,12 +45,36 @@ The script leverages `pandas` to perform ranking and merging operations to ensur
 
 ## Code Example
 ```python
-python = ....
+
+
+round_robin_leads_sales(leads_dataset, sales_dataset)
 ```
 For the full code, refer to the project file `round_robin_leads_sales.py`.
 
 ## Dependencies
+- `pandas`: For handling the data and applying transformations
+- Python 3.x
+
+Install the required libraries via pip:
+    ```bash
+    pip install pandas
+    ```
 
 ## How to Run the Script
+1) Prepare the datasets for leads and sales teams.
+2) Run the Python script using the following command:
+```bash
+python etl_assign_sales_round_robin.py
+```
+The script will print the summary of lead assignment and return the final merged dataset with assigned and unassigned leads.
 
 ## Example Output
+```
+The result of Round Robin:
+- Assigned directly = 500 leads
+- Assigned with modify the subbranch into 0 value = 100 leads
+- Assigned with branch-branch level = 50 leads
+- Not Assigned yet = 5 leads
+
+Total leads for checking purposes = 655 leads
+```
