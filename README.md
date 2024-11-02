@@ -1,4 +1,4 @@
-# ETL Round Robin Lead Assignment in Python
+# ETL Round Robin Lead Assignment in PySpark
 
 ## Problem Statement
 Managing the distribution of leads to the sales team manually can be both time-consuming and inefficient. In many cases, particularly in situations where the sales are organized by regions, branches, and sub-branches, you may encounter unassigned leads or leads assigned unevenly across salespeople. Manually addressing this, especially at scale, is prone to errors and introduces the need for constant supervision.
@@ -17,7 +17,7 @@ This project implements a Python script that performs a round-robin distribution
 1) **Region-Branch-Subbranch Level**: Primary assignment at the most granular level.
 1) **Region-Branch Level**: Handling cases where there is no matching sub-branch.
 1) **Fallback Assignment**: Re-distributing unassigned leads if necessary.
-The script leverages `pandas` to perform ranking and merging operations to ensure each lead is assigned to a sales team member, while maintaining a balanced distribution across salespeople.
+The script leverages `pyspark` to perform ranking and merging operations to ensure each lead is assigned to a sales team member, while maintaining a balanced distribution across salespeople.
 
 ## Workflow
 1) Dataset Preparation:
@@ -45,11 +45,13 @@ The script leverages `pandas` to perform ranking and merging operations to ensur
 
 ## Code Example
 ```python
-import pandas as pd
+from pyspark.sql import SparkSession, functions as F, Window
+
+spark = SparkSession.builder.appName("ETLRoundRobinLeadsSales").getOrCreate()
 
 # assume you have leads and sales dataset with region, branch, and subbranch code columns.
-leads_df = pd.DataFrame(data)
-sales_df = pd.DataFrame(sales_data)
+leads_df = spark.createDataFrame(leads_data, schema=leads_schema)
+sales_df = spark.createDataFrame(sales_data, schema=sales_schema)
 
 # Enhance Leads with sales id based on region-branch-subbranch
 sales_assigned_df = round_robin_leads_sales(leads_df, sales_df)
@@ -58,13 +60,13 @@ sales_assigned_df
 For the full code, refer to the project file `round_robin_leads_sales.py`.
 
 ## Dependencies
-- `pandas`: For handling the data and applying transformations
+- `pyspark`: For handling the big data and applying transformations
 - Python 3.x
 
 Install the required libraries via pip:
     
 ```bash
-pip install pandas
+pip install pyspark
 ```
 
 ## How to Run the Script
